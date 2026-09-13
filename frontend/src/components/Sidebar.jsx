@@ -56,7 +56,7 @@ const Sidebar = ({ onNewChat }) => {
 
       <div className="mt-auto border-top border-secondary pt-3">
         <div className="d-flex align-items-center gap-2 text-secondary small">
-          <FiFileText /> Powered by Gemini-flash + FAISS
+          <FiFileText /> RetrievalIQ Core • Hybrid AI Engine
         </div>
       </div>
     </div>
@@ -64,3 +64,4 @@ const Sidebar = ({ onNewChat }) => {
 };
 
 export default Sidebar;
+

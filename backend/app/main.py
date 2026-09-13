@@ -30,7 +30,7 @@ async def upload_pdfs(files: List[UploadFile] = File(...)):
     saved_paths = []
 
     for file in files:
-        if not file.filename.lower().endswith(('.pdf','.docx','.pptx','.ppt')):
+        if not file.filename.lower().endswith(('.pdf','.docx','.pptx','.ppt','.txt')):
             raise HTTPException(status_code=400, detail=f'File {file.filename} is not supported')
         
         file_path = os.path.join(UPLOAD_DIR, file.filename)
@@ -47,7 +47,12 @@ async def upload_pdfs(files: List[UploadFile] = File(...)):
 @app.post('/chat/stream')
 async def chat_stream(query: QueryModel):
     return StreamingResponse(
-        stream_rag_response(query.question, query.session_id), media_type='text/event-stream'
+        stream_rag_response(query.question, query.session_id), media_type='text/event-stream',
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no"  # Disables proxy buffering
+        }
     )
 
 @app.get('/history/{session_id}')
@@ -59,6 +64,9 @@ async def get_history(session_id: str):
             'sender': 'user' if msg.type == 'human' else 'bot', 'text': msg.content
         })
     return {'session_id': session_id, 'messages': messages}
+
+
+
 
 
     

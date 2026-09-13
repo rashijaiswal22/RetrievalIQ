@@ -1,6 +1,20 @@
 import React, { useEffect, useRef } from 'react';
 import { FiUser, FiCpu } from 'react-icons/fi';
-import ReactMarkdown from 'react-markdown'; // 👈 Yahan Import kiya
+import ReactMarkdown from 'react-markdown';
+
+const markdownComponents = {
+  pre({ children }) {
+    return <pre className="code-block">{children}</pre>;
+  },
+
+  code({ className, children, ...props }) {
+    return (
+      <code className={className || 'inline-code'} {...props}>
+        {children}
+      </code>
+    );
+  },
+};
 
 const ChatWindow = ({ messages, streamingText, loading }) => {
   const bottomRef = useRef(null);
@@ -13,9 +27,16 @@ const ChatWindow = ({ messages, streamingText, loading }) => {
     <div className="flex-grow-1 overflow-auto p-0">
       {messages.length === 0 && !streamingText && !loading ? (
         <div className="h-100 d-flex flex-column justify-content-center align-items-center text-center p-4">
-          <h2 className="fw-bold mb-3 text-light">Document RAG AI</h2>
-          <p className="text-secondary" style={{ maxWidth: '400px' }}>
-            Upload the file from Left panel and start the conversation. Conversation History is restored!
+          <h2 className="fw-bold mb-3 text-light">
+            Document RAG AI
+          </h2>
+
+          <p
+            className="text-secondary"
+            style={{ maxWidth: '400px' }}
+          >
+            Upload the file from Left panel and start the conversation.
+            Conversation History is restored!
           </p>
         </div>
       ) : (
@@ -30,6 +51,7 @@ const ChatWindow = ({ messages, streamingText, loading }) => {
               }`}
             >
               <div className="container-lg d-flex gap-3 max-w-3xl">
+
                 <div className="avatar">
                   {msg.sender === 'user' ? (
                     <div className="bg-primary rounded p-2 text-white">
@@ -41,9 +63,16 @@ const ChatWindow = ({ messages, streamingText, loading }) => {
                     </div>
                   )}
                 </div>
-                <div className="text-light align-self-center markdown-body" style={{ width: '100%' }}>
-                  <ReactMarkdown>{msg.text}</ReactMarkdown>
+
+                <div
+                  className="text-light align-self-center markdown-body"
+                  style={{ width: '100%' }}
+                >
+                  <ReactMarkdown components={markdownComponents}>
+                    {String(msg.text ?? '')}
+                  </ReactMarkdown>
                 </div>
+
               </div>
             </div>
           ))}
@@ -51,14 +80,17 @@ const ChatWindow = ({ messages, streamingText, loading }) => {
           {loading && !streamingText && (
             <div className="py-4 px-4 px-md-5 bot-msg border-top border-bottom border-secondary border-opacity-25">
               <div className="container-lg d-flex gap-3">
+
                 <div className="avatar">
                   <div className="bg-success rounded p-2 text-white">
                     <FiCpu size={18} />
                   </div>
                 </div>
+
                 <div className="text-secondary align-self-center fst-italic">
                   Thinking and searching documents...
                 </div>
+
               </div>
             </div>
           )}
@@ -66,17 +98,26 @@ const ChatWindow = ({ messages, streamingText, loading }) => {
           {streamingText && (
             <div className="py-4 px-4 px-md-5 bot-msg border-top border-bottom border-secondary border-opacity-25">
               <div className="container-lg d-flex gap-3">
+
                 <div className="avatar">
                   <div className="bg-success rounded p-2 text-white">
                     <FiCpu size={18} />
                   </div>
                 </div>
-                <div className="text-light align-self-center markdown-body" style={{ width: '100%' }}>
-                  <ReactMarkdown>{streamingText}</ReactMarkdown>
+
+                <div
+                  className="text-light align-self-center markdown-body"
+                  style={{ width: '100%' }}
+                >
+                  <ReactMarkdown components={markdownComponents}>
+                    {String(streamingText ?? '')}
+                  </ReactMarkdown>
                 </div>
+
               </div>
             </div>
           )}
+
           <div ref={bottomRef} />
         </div>
       )}
@@ -85,3 +126,4 @@ const ChatWindow = ({ messages, streamingText, loading }) => {
 };
 
 export default ChatWindow;
+
