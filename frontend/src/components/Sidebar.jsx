@@ -65,3 +65,4 @@ const Sidebar = ({ onNewChat }) => {
 
 export default Sidebar;
 
+
