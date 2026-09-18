@@ -20,7 +20,7 @@ except ImportError:
 from langchain_core.prompts import (ChatPromptTemplate,MessagesPlaceholder)
 from langchain_classic.chains.combine_documents import (create_stuff_documents_chain)
 from langchain_classic.chains import (create_retrieval_chain)
-from app.pdf_loader import (embeddings,get_bm25_retriever)
+from app.pdf_loader import (get_embeddings,get_bm25_retriever)
 from app.config import (GEMINI_API_KEY, VECTOR_STORE_DIR)
 
 store = {}
@@ -45,7 +45,7 @@ def build_retriever():
     if not os.path.exists(faiss_path):
         return None
     try:
-        vectorstore = FAISS.load_local(faiss_path, embeddings, allow_dangerous_deserialization=True )
+        vectorstore = FAISS.load_local(faiss_path, get_embeddings(), allow_dangerous_deserialization=True )
 
         faiss_retriever = vectorstore.as_retriever(
             search_kwargs={"k": 5 })
@@ -296,6 +296,8 @@ async def stream_rag_response(question: str,session_id: str) -> AsyncGenerator[s
         yield ("data: [DONE]\n\n" )
     
         
+
+
 
 
 

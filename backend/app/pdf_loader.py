@@ -15,9 +15,19 @@ from langchain_community.retrievers import BM25Retriever
 from app.config import VECTOR_STORE_DIR
 
 
-embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-l6-v2")
 
 BM25_FILE_PATH = os.path.join(VECTOR_STORE_DIR, "bm25_store.pkl")
+
+_embeddings = None
+
+def get_embeddings():
+  global _embeddings
+  if _embeddings is None:
+    print("Loading HuggingFace embeddings model...")
+    _embeddings = HuggingFaceEmbeddings(
+        model_name="sentence-transformers/all-MiniLM-l6-v2"
+    )
+  return _embeddings
 
 def load_docx(file_path: str) -> List[LangChainDocument]:
 
@@ -29,7 +39,6 @@ def load_docx(file_path: str) -> List[LangChainDocument]:
     text = "\n".join(full_text)
 
     return [LangChainDocument(page_content=text, metadata={"source": os.path.basename(file_path)})]
-
 
 def load_pptx(file_path: str) -> List[LangChainDocument]:
 
@@ -88,7 +97,7 @@ def process_pdfs_and_create_retrievers(file_paths: List[str]):
     # Create vector store    
     os.makedirs(VECTOR_STORE_DIR,exist_ok=True)
 
-    vectorstore = FAISS.from_documents(splits, embeddings)
+    vectorstore = FAISS.from_documents(splits, get_embeddings())
     vectorstore.save_local(os.path.join(VECTOR_STORE_DIR, "faiss_index"))
 
     # Create BM25 retriever
@@ -112,6 +121,7 @@ def get_bm25_retriever():
     except Exception as e:
         print(f"BM25 load error: {e}")
         return None
+
 
 
      
