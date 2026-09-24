@@ -35,7 +35,7 @@ function App() {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL || 'http://127.0.0.1:8000'}/chat/stream`,
+        'https://retrievaliq-backend.onrender.com/chat/stream',
         {
           method: 'POST',
           headers: {
@@ -185,4 +185,5 @@ function App() {
 }
 
 export default App;
+
 
