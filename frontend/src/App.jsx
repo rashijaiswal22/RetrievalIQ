@@ -35,7 +35,7 @@ function App() {
 
     try {
       const response = await fetch(
-        'https://retrievaliq-backend.onrender.com/chat/stream',
+        'https://rag-backend-6pkf.onrender.com/chat/stream',
         {
           method: 'POST',
           headers: {
@@ -185,5 +185,6 @@ function App() {
 }
 
 export default App;
+
 
 
