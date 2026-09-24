@@ -35,7 +35,7 @@ function App() {
 
     try {
       const response = await fetch(
-        'http://127.0.0.1:8000/chat/stream',
+        `${process.env.REACT_APP_BACKEND_URL || 'http://127.0.0.1:8000'}/chat/stream`,
         {
           method: 'POST',
           headers: {
@@ -185,3 +185,4 @@ function App() {
 }
 
 export default App;
+
