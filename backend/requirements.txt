@@ -6,9 +6,7 @@ langchain
 langchain-core
 langchain-community
 langchain-google-genai
-langchain-huggingface
 faiss-cpu
-sentence-transformers
 python-docx
 python-pptx
 python-multipart
