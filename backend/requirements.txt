@@ -1,6 +1,7 @@
 fastapi
 uvicorn
 pydantic
+pypdf
 python-dotenv
 langchain
 langchain-core
@@ -10,3 +11,4 @@ faiss-cpu
 python-docx
 python-pptx
 python-multipart
+google-generativeai
