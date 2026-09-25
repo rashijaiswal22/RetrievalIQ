@@ -18,7 +18,7 @@ const Sidebar = ({ onNewChat }) => {
     setStatusMsg("Processing Document's...");
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/upload', {
+      const res = await fetch('https://rag-backend-6pkf.onrender.com/upload', {
         method: 'POST',
         body: formData,
       });
@@ -64,5 +64,6 @@ const Sidebar = ({ onNewChat }) => {
 };
 
 export default Sidebar;
+
 
 
