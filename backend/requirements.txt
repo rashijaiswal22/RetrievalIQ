@@ -12,3 +12,4 @@ python-docx
 python-pptx
 python-multipart
 google-generativeai
+rank_bm25
