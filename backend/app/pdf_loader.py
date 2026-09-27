@@ -32,11 +32,11 @@ def get_embeddings():
             # A test check or just returning the working configuration object
             return embeddings
         except Exception as e:
-            print(f"Model {model_name} failed: {e}")
+            print(f"Trying Model {model_name} failed: {e}")
             continue
 
     return GoogleGenerativeAIEmbeddings(
-        model="text-embedding-004",  
+        model="text-embedding-001",  
         google_api_key=GEMINI_API_KEY
     )
 
@@ -114,6 +114,7 @@ def get_bm25_retriever():
     except Exception as e:
         print(f"BM25 load error: {e}")
         return None
+
 
 
 
