@@ -17,26 +17,9 @@ from app.config import VECTOR_STORE_DIR, GEMINI_API_KEY
 BM25_FILE_PATH = os.path.join(VECTOR_STORE_DIR, "bm25_store.pkl")
 
 def get_embeddings():
-    models_to_try = [
-        "text-embedding-004",
-        "gemini-embedding-001",
-        "embedding-001"
-    ]
     
-    for model_name in models_to_try:
-        try:
-            embeddings = GoogleGenerativeAIEmbeddings(
-                model=model_name,
-                google_api_key=GEMINI_API_KEY
-            )
-            # A test check or just returning the working configuration object
-            return embeddings
-        except Exception as e:
-            print(f"Trying Model {model_name} failed: {e}")
-            continue
-
     return GoogleGenerativeAIEmbeddings(
-        model="text-embedding-001",  
+        model="gemini-embedding-2-preview",  
         google_api_key=GEMINI_API_KEY
     )
 
@@ -114,6 +97,7 @@ def get_bm25_retriever():
     except Exception as e:
         print(f"BM25 load error: {e}")
         return None
+
 
 
 
