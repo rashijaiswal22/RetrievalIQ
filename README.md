@@ -108,7 +108,7 @@
 * **File Parsers:** PyPDF, python-docx, python-pptx
 
 ### **Frontend (`/frontend`)**
-* **Library:** React.js (Vite/CRA)
+* **Library:** React.js 
 * **Styling:** Bootstrap, React Icons
 * **Markdown Support:** `react-markdown` with code-block highlighting
 
@@ -172,7 +172,6 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 **3. Frontend Setup**
 Open a new terminal tab:
 ```
-
 cd frontend
 npm install
 npm start
