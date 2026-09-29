@@ -37,42 +37,38 @@
 - **Modern Dark UI**: Built with React, Bootstrap, and `react-markdown` featuring customized code syntax rendering.
 
 ## 🏗️ System Architecture
+       ┌───────────────────────────────────┐
+       │       React.js Frontend UI        │
+       └─────────────────┬─────────────────┘
+                         │
+         HTTP POST & SSE Token Stream
+                         ▼
+       ┌───────────────────────────────────┐
+       │          FastAPI Backend          │
+       └──────┬─────────────────────┬──────┘
+              │                     │
+              ▼ (/upload)           ▼ (/chat/stream)
+    ┌──────────────────────────┐ ┌───────────────────────────────────┐
+    │ Multi-Format Ingestion   │ │ Hybrid Retrieval & RAG            │
+    │ • PyPDFLoader (.pdf)     │ │ • EnsembleRetriever (0.5 / 0.5)   │
+    │ • python-docx (.docx)    │ │ • FAISS Vector Store (Semantic)   │
+    │ • python-pptx (.pptx)    │ │ • BM25 Pickle Store (Keyword)     │
+    │ • Text Loader (.txt)     │ └─────────────────┬─────────────────┘
+    └─────────────┬────────────┘                   │
+                  ▼                                ▼
+    ┌──────────────────────────┐ ┌───────────────────────────────────┐
+    │ Text Splitting           │ │ Google Gemini LLM                 │
+    │ RecursiveCharacterSplit  │ │ • Multi-Model Fallback Chain      │
+    └─────────────┬────────────┘ │   (gemini-3.6/2.5/1.5-flash)      │
+                  ▼              └───────────────────────────────────┘
+    ┌──────────────────────────┐
+    │ Storage & Indexing       │
+    │ • FAISS Index            │
+    │ • BM25 Store (.pkl)      │
+    │ • Uploaded Files (Dir)   │
+    └──────────────────────────┘
 
-       ┌────────────────────────────────────────────────────────┐
-       │                 React.js Frontend UI                   │
-       │  (ChatWindow, Sidebar, MessageInput, react-markdown)   │
-       └───────────────────────────┬────────────────────────────┘
-                                   │
-                    HTTP POST (Multi-part / JSON) & SSE Stream
-                                   ▼
-       ┌────────────────────────────────────────────────────────┐
-       │                   FastAPI Backend                      │
-       │                   (app/main.py)                        │
-       └─────┬───────────────────────────────┬──────────────────┘
-             │                               │
-            ▼ (/upload)                     ▼ (/chat/stream)
-┌─────────────────────────┐     ┌──────────────────────────────────┐
-│  Multi-Format Ingestion │     │       Hybrid Retrieval & RAG     │
-│  • PyPDFLoader (.pdf)   │     │       (app/rag_chain.py)         │
-│  • python-docx (.docx)  │     └──────────────┬───────────────────┘
-│  • python-pptx (.pptx)  │                    │
-│  • Text Loader (.txt)   │     ┌──────────────┴───────────────────┐
-└────────────┬────────────┘     │ • EnsembleRetriever (0.5 / 0.5)  │
-             │                  │ • FAISS Vector Store (Semantic)  │
-             ▼                  │ • BM25 Pickle Store (Keyword)    │
-┌─────────────────────────┐     └──────────────┬───────────────────┘
-│    Text Splitting       │                    │
-│ RecursiveCharacterSplit │                    ▼
-└────────────┬────────────┘     ┌──────────────────────────────────┐
-             │                  │       Google Gemini LLM          │
-             ▼                  │  • Multi-Model Fallback Chain    │
-┌─────────────────────────┐     │    (gemini-3.6/2.5/1.5-flash)    │
-│  Storage & Embedding    │     └──────────────────────────────────┘
-│  • FAISS Index          │
-│  • BM25 Store (.pkl)    │
-│  • Uploaded Files (Dir) │
-└─────────────────────────┘
-
+       
 ### 🔄 End-to-End Execution Flow (Upload to Answer Generation)
 
 #### **Phase 1: Document Ingestion & Indexing (Upload to Storage)**
@@ -149,15 +145,13 @@ RetrievalIQ/
 ```
 
 ## ⚙️ Local Installation & Setup
-** 1. Clone the Repository **
+**1. Clone the Repository**
 ``` text
-Bash
 git clone [https://github.com/rashijaiswal22/RetrievalIQ.git](https://github.com/rashijaiswal22/RetrievalIQ.git)
 cd RetrievalIQ
 ```
-** 2. Backend Setup **
+**2. Backend Setup**
 ```text
-Bash
 cd backend
 python -m venv .venv
 source .venv/bin/activate  # On Windows use: .venv\Scripts\activate
@@ -165,18 +159,18 @@ pip install -r requirements.txt
 ```
 Create a .env file inside the backend folder:
 
-** Code snippet **
+**Code snippet**
 ```
 GEMINI_API_KEY=your_google_gemini_api_key_here
 HF_TOKEN=your_huggingface_token_optional
 ```
 
-** Run the FastAPI server: **
+**Run the FastAPI server:**
 
-```Bash
+```
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
-3. Frontend Setup
+**3. Frontend Setup**
 Open a new terminal tab:
 ```
 Bash
@@ -184,6 +178,6 @@ cd frontend
 npm install
 npm start
 ```
-🌐 Deployment Links
+**🌐 Deployment Links**
 * Frontend App: https://retrievaliq.onrender.com
 * Backend API / Swagger Docs: https://rag-backend-6pkf.onrender.com/docs
