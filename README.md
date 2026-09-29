@@ -157,9 +157,8 @@ python -m venv .venv
 source .venv/bin/activate  # On Windows use: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
-Create a .env file inside the backend folder:
+**Create a .env file inside the backend folder:**
 
-**Code snippet**
 ```
 GEMINI_API_KEY=your_google_gemini_api_key_here
 HF_TOKEN=your_huggingface_token_optional
@@ -173,7 +172,7 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 **3. Frontend Setup**
 Open a new terminal tab:
 ```
-Bash
+
 cd frontend
 npm install
 npm start
