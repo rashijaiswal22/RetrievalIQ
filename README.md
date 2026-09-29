@@ -13,19 +13,19 @@
 
 </div>
 
----
+
 
 ## 📸 Application UI Previews
 
 <div align="center">
   <img src="./img/rag_img1.png" width="48%" alt="RetrievalIQ UI 1" />
-  <img src=./img/rag_img2.png" width="48%" alt="RetrievalIQ UI 2" />
+  <img src="./img/rag_img2.png" width="48%" alt="RetrievalIQ UI 2" />
   <br>
   <img src="./img/rag_img3.png" width="48%" alt="RetrievalIQ UI 3" />
   <img src="./img/rag_img4.png" width="48%" alt="RetrievalIQ UI 4" />
 </div>
 
----
+
 
 ## ✨ Key Features
 
@@ -36,7 +36,6 @@
 - **Session-Based Chat History**: Maintains isolated conversation sessions per user/browser tab.
 - **Modern Dark UI**: Built with React, Bootstrap, and `react-markdown` featuring customized code syntax rendering.
 
----
 ## 🏗️ System Architecture
 
        ┌────────────────────────────────────────────────────────┐
@@ -51,7 +50,7 @@
        │                   (app/main.py)                        │
        └─────┬───────────────────────────────┬──────────────────┘
              │                               │
-```          ▼ (/upload)                     ▼ (/chat/stream)
+            ▼ (/upload)                     ▼ (/chat/stream)
 ┌─────────────────────────┐     ┌──────────────────────────────────┐
 │  Multi-Format Ingestion │     │       Hybrid Retrieval & RAG     │
 │  • PyPDFLoader (.pdf)   │     │       (app/rag_chain.py)         │
@@ -73,7 +72,7 @@
 │  • BM25 Store (.pkl)    │
 │  • Uploaded Files (Dir) │
 └─────────────────────────┘
-```
+
 ### 🔄 End-to-End Execution Flow (Upload to Answer Generation)
 
 #### **Phase 1: Document Ingestion & Indexing (Upload to Storage)**
@@ -117,7 +116,7 @@
 * **Styling:** Bootstrap, React Icons
 * **Markdown Support:** `react-markdown` with code-block highlighting
 
----
+
 
 ## 📂 Project Structure
 
@@ -150,13 +149,13 @@ RetrievalIQ/
 ```
 
 ## ⚙️ Local Installation & Setup
-1. Clone the Repository
+** 1. Clone the Repository **
 ``` text
 Bash
 git clone [https://github.com/rashijaiswal22/RetrievalIQ.git](https://github.com/rashijaiswal22/RetrievalIQ.git)
 cd RetrievalIQ
 ```
-2. Backend Setup
+** 2. Backend Setup **
 ```text
 Bash
 cd backend
@@ -167,8 +166,10 @@ pip install -r requirements.txt
 Create a .env file inside the backend folder:
 
 ** Code snippet **
+```
 GEMINI_API_KEY=your_google_gemini_api_key_here
 HF_TOKEN=your_huggingface_token_optional
+```
 
 ** Run the FastAPI server: **
 
@@ -184,5 +185,5 @@ npm install
 npm start
 ```
 🌐 Deployment Links
-Frontend App: https://retrievaliq.onrender.com
-Backend API / Swagger Docs: https://rag-backend-6pkf.onrender.com/docs
+* Frontend App: https://retrievaliq.onrender.com
+* Backend API / Swagger Docs: https://rag-backend-6pkf.onrender.com/docs
