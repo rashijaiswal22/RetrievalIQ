@@ -97,6 +97,7 @@ def get_bm25_retriever():
     except Exception as e:
         print(f"BM25 load error: {e}")
         return None
+    
 
 
 
