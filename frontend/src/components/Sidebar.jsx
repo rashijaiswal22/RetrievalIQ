@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FiUploadCloud, FiFileText, FiPlus } from 'react-icons/fi';
+import { jsx } from 'react/jsx-runtime';
 
 const Sidebar = ({ onNewChat }) => {
   const [uploading, setUploading] = useState(false);
@@ -64,6 +65,7 @@ const Sidebar = ({ onNewChat }) => {
 };
 
 export default Sidebar;
+
 
 
 
