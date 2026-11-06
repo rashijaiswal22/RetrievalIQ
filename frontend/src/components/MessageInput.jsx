@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FiSend } from 'react-icons/fi';
+import { jsx } from 'react/jsx-runtime';
 
 const MessageInput = ({ onSend, disabled }) => {
   const [text, setText] = useState('');
@@ -38,13 +39,6 @@ const MessageInput = ({ onSend, disabled }) => {
 };
 
 export default MessageInput;
-
-
-
-
-
-
-
 
 
 
