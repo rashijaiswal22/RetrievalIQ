@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { FiUser, FiCpu } from 'react-icons/fi';
 import ReactMarkdown from 'react-markdown';
+import { jsx } from 'react/jsx-runtime';
 
 const markdownComponents = {
   pre({ children }) {
@@ -126,6 +127,11 @@ const ChatWindow = ({ messages, streamingText, loading }) => {
 };
 
 export default ChatWindow;
+
+
+
+
+
 
 
 
