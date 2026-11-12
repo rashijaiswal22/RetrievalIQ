@@ -71,7 +71,7 @@ body {
 .markdown-body ul,
 .markdown-body ol {
   margin-bottom: 16px;
-  padding-left: 28px;
+  padding: 28px;
 }
 
 .code-block {
@@ -95,6 +95,10 @@ body {
   border-radius: 4px;
   font-family: Consolas, Monaco, 'Courier New', monospace;
 }
+
+
+
+
 
 
 
