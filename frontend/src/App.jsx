@@ -169,7 +169,7 @@ function App() {
           <ChatWindow
             messages={messages}
             streamingText={streamingText}
-            loading={loading}
+            ={loading}
           />
 
           <MessageInput
