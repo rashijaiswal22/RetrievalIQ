@@ -25,8 +25,7 @@ const MessageInput = ({ onSend, disabled }) => {
             onChange={(e) => setText(e.target.value)}
             disabled={disabled}
           />
-          <button
-            type="submit"
+          <button type="submit"
             className="btn btn-success position-absolute end-0 top-50 translate-middle-y me-2 rounded-2"
             disabled={disabled || !text.trim()}
           >
@@ -39,6 +38,9 @@ const MessageInput = ({ onSend, disabled }) => {
 };
 
 export default MessageInput;
+
+
+
 
 
 
