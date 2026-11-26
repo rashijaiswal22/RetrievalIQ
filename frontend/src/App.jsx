@@ -166,16 +166,9 @@ function App() {
 
         <div className="col-md-9 col-lg-10 chat-bg d-flex flex-column h-100">
 
-          <ChatWindow
-            messages={messages}
-            streamingText={streamingText}
-            loading={loading}
-          />
+          <ChatWindow messages={messages} streamingText={streamingText} loading={loading} />
 
-          <MessageInput
-            onSend={handleSendMessage}
-            disabled={loading}
-          />
+          <MessageInput onSend={handleSendMessage} disabled={loading}/>
 
         </div>
 
@@ -185,6 +178,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
